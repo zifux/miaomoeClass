@@ -169,7 +169,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            AlertDialog.Builder show = new AlertDialog.Builder(this).setTitle("关于").setMessage("测试版本0.0.2\n联系作者:xiuu@qq.com").setPositiveButton("关闭", null);
+            AlertDialog.Builder show = new AlertDialog.Builder(this).setTitle("关于").setMessage("测试版本0.2\n联系作者:xiuu@qq.com").setPositiveButton("关闭", null);
             show.show();
             return true;
         }else if(id == R.id.action_date){
