@@ -12,6 +12,7 @@
     android:id="@+id/vper"
     android:layout_weight="1"
     android:layout_marginBottom="5dp" />
-    <include layout="@layout/top"/>
+    <include layout="@layout/top"
+         />
 
 </LinearLayout>

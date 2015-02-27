@@ -385,26 +385,26 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     }
 
     public void setbtn(int btn) {
-        btn1.setBackgroundColor(Color.parseColor("#50000000"));
-        btn2.setBackgroundColor(Color.parseColor("#50000000"));
-        btn3.setBackgroundColor(Color.parseColor("#50000000"));
-        btn4.setBackgroundColor(Color.parseColor("#50000000"));
-        btn5.setBackgroundColor(Color.parseColor("#50000000"));
+        btn1.setBackgroundColor(Color.parseColor("#60000000"));
+        btn2.setBackgroundColor(Color.parseColor("#60000000"));
+        btn3.setBackgroundColor(Color.parseColor("#60000000"));
+        btn4.setBackgroundColor(Color.parseColor("#60000000"));
+        btn5.setBackgroundColor(Color.parseColor("#60000000"));
         switch (btn){
             case 1:
-                btn1.setBackgroundColor(Color.parseColor("#90000000"));
+                btn1.setBackgroundColor(Color.parseColor("#96dc5a00"));
                 break;
             case 2:
-                btn2.setBackgroundColor(Color.parseColor("#90000000"));
+                btn2.setBackgroundColor(Color.parseColor("#968dd7dc"));
                 break;
             case 3:
-                btn3.setBackgroundColor(Color.parseColor("#90000000"));
+                btn3.setBackgroundColor(Color.parseColor("#9694bfdc"));
                 break;
             case 4:
-                btn4.setBackgroundColor(Color.parseColor("#90000000"));
+                btn4.setBackgroundColor(Color.parseColor("#96c8dca3"));
                 break;
             case 5:
-                btn5.setBackgroundColor(Color.parseColor("#90000000"));
+                btn5.setBackgroundColor(Color.parseColor("#96ffe89d"));
                 break;
         }
     }
