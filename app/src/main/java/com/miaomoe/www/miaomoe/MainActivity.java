@@ -182,7 +182,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             }else {
                 NetPost getClass=new NetPost(mainHandler,this);
                 tomorrow=true;
-                getClass.execute(z,x+1);
+                getClass.execute(z,(x+1>7)?1:x+1);
                 ((TextView)findViewById(R.id.loading)).setText("Loading...");
                 item.setTitle("今天");
             }
