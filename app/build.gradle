@@ -8,7 +8,7 @@ android {
         applicationId "com.miaomoe.www.miaomoe"
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 2
+        versionCode 1
         versionName "0.2"
     }
     buildTypes {
