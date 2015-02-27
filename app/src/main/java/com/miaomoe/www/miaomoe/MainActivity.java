@@ -3,6 +3,7 @@ package com.miaomoe.www.miaomoe;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
@@ -51,6 +52,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private ViewPager viewPager;
     private FragmentPagerAdapter fpa;
     private List<Fragment> fList;
+    private boolean tomorrow;
 
     private FragmentManager fm;
     private FragmentTransaction ft;
@@ -70,11 +72,15 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        abr=getSupportActionBar();
+        abr.setSubtitle("\t 努力学习吧\\(≧ω≦)");
+        Resources res=getResources();
+        abr.setBackgroundDrawable(res.getDrawable(R.drawable.bar2));
         setContentView(R.layout.activity_main);
-        NetPost getClass=new NetPost(mainHandler,this);
         if(z<=0){
             z=1;
         }
+        NetPost getClass=new NetPost(mainHandler,this);
         getClass.execute(z,x);
         initView();
         initEvent();
@@ -144,8 +150,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         class5=new class3(this);
         class7=new class4(this);
         class9=new class5(this);
-        String[] xTypes={"天","一","二","三","四","五","六"};
-        ((TextView)findViewById(R.id.loading)).setText("第"+z+"周 星期"+xTypes[x-1]);
 
     }
 
@@ -169,6 +173,20 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             show.show();
             return true;
         }else if(id == R.id.action_date){
+            if(item.getTitle()=="今天"){
+                NetPost getClass=new NetPost(mainHandler,this);
+                tomorrow=false;
+                getClass.execute(z,x);
+                ((TextView)findViewById(R.id.loading)).setText("Loading...");
+                item.setTitle("明天");
+            }else {
+                NetPost getClass=new NetPost(mainHandler,this);
+                tomorrow=true;
+                getClass.execute(z,x+1);
+                ((TextView)findViewById(R.id.loading)).setText("Loading...");
+                item.setTitle("今天");
+            }
+
             return true;
         }else if(id==R.id.action_FindEmpty){
             Intent text=new Intent(this,FindEmpty.class);
@@ -217,8 +235,13 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
         viewPager.setAdapter(fpa);
         setbtn(1);
-    }
+        setx();
 
+    }
+    private void setx(){
+        String[] xTypes={"末日","天","一","二","三","四","五","六"};
+        ((TextView)findViewById(R.id.loading)).setText("第"+z+"周 星期"+(tomorrow?(xTypes[(x+1>7)?1:x+1]+" (明天)"):xTypes[x]));
+    }
     private void initGrid(GridView grid) throws JSONException {
         SimpleAdapter classList=new SimpleAdapter(this,dataList1,R.layout.item_classroom,new String[]{"class","name","cls"},new int[]{R.id.class_room,R.id.class_name,R.id.class_cls});
         grid.setAdapter(classList);

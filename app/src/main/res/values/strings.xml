@@ -2,6 +2,6 @@
     <string name="app_name">自习评定</string>
 
     <string name="action_settings">关于</string>
-    <string name="action_date">更改时间</string>
+    <string name="action_date">明天</string>
     <string name="action_find">统计</string>
 </resources>

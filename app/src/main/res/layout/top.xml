@@ -4,45 +4,64 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_gravity="center_horizontal">
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:id="@+id/imageButton1"
             android:background="#50000000"
-            android:minHeight="30dp"/>
+            android:minHeight="30dp"
+            android:src="@drawable/sun1"
+            android:adjustViewBounds="true"
+            android:scaleType="fitEnd"
+            android:layout_gravity="bottom" />
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:id="@+id/imageButton2"
             android:background="#50000000"
-            android:minHeight="30dp"/>
+            android:minHeight="30dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/sun2" />
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:id="@+id/imageButton3"
             android:background="#50000000"
-            android:minHeight="30dp"/>
+            android:minHeight="30dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/sun3"
+            android:cropToPadding="false"
+            android:clickable="false"
+            android:baselineAlignBottom="false" />
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:id="@+id/imageButton4"
             android:background="#50000000"
-            android:minHeight="30dp"/>
+            android:minHeight="30dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/sun4" />
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:id="@+id/imageButton5"
             android:background="#50000000"
-            android:minHeight="30dp" />
+            android:minHeight="30dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitEnd"
+            android:src="@drawable/sun5" />
     </LinearLayout>
