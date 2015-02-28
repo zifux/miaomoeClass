@@ -1,6 +1,5 @@
 package com.miaomoe.www.miaomoe;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -11,9 +10,6 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.SimpleAdapter;
 
-/**
- * Created by xiuu on 2015/2/24 0024.
- */
 
 public class class1 extends Fragment {
     private MainActivity f;
