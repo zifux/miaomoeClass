@@ -2,11 +2,21 @@ package com.miaomoe.www.miaomoe;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -14,12 +24,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -28,6 +40,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONTokener;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -49,6 +66,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private ImageButton btn3;
     private ImageButton btn4;
     private ImageButton btn5;
+    private ImageView backPic;
     private ViewPager viewPager;
     private FragmentPagerAdapter fpa;
     private List<Fragment> fList;
@@ -77,12 +95,19 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         Resources res=getResources();
         abr.setBackgroundDrawable(res.getDrawable(R.drawable.bar2));
         setContentView(R.layout.activity_main);
+        initView();
+        String backpic=getSharedPreferences("setting",0).getString("BackPic",null);
+        if(backpic!=null){
+            backPic.setImageBitmap(BitmapFactory.decodeFile(backpic));
+        }else{
+            backpic=getSharedPreferences("setting",0).getString("YBackPic",null);
+        }
         if(z<=0){
             z=1;
         }
         NetPost getClass=new NetPost(mainHandler,this);
         getClass.execute(z,x);
-        initView();
+
         initEvent();
         setPage(1);
 
@@ -141,7 +166,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         btn3= (ImageButton) findViewById(R.id.imageButton3);
         btn4= (ImageButton) findViewById(R.id.imageButton4);
         btn5= (ImageButton) findViewById(R.id.imageButton5);
-
+        backPic= (ImageView) findViewById(R.id.back_pic);
         /*fm=getSupportFragmentManager();
         ft = fm.beginTransaction();*/
 
@@ -169,8 +194,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            AlertDialog.Builder show = new AlertDialog.Builder(this).setTitle("关于").setMessage("测试版本0.2\n联系作者:xiuu@qq.com").setPositiveButton("关闭", null);
-            show.show();
+            /*Intent text=new Intent(this,Setting.class);
+            startActivityForResult(text, 100);*/
+            Intent pic=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(pic,200);
             return true;
         }else if(id == R.id.action_date){
             if(item.getTitle()=="今天"){
@@ -193,7 +220,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             startActivityForResult(text, 100);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
     public void toUpdate(String json){
@@ -381,6 +407,73 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             case R.id.imageButton5:
                 setbtn(5);
                 setPage(5);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode==200&&resultCode==RESULT_OK){
+            String[] type={MediaStore.Images.Media.DATA};
+            Uri image=data.getData();
+            Cursor res=getContentResolver().query(image,type,null,null,null);
+            res.moveToFirst();
+            String YpicPath=res.getString(res.getColumnIndex(type[0]));
+            Bitmap bm=(BitmapFactory.decodeFile(YpicPath));
+            String picPath=YpicPath;
+            //原图宽高
+            int rawHeight = bm.getHeight();
+            int rawWidth = bm.getWidth();
+            // 设定图片新的高宽
+            DisplayMetrics dm=new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(dm);
+            File backpicPath=new File("/sdcard/Android/data/com.miaomoe.zixi");
+            if(!backpicPath.exists()){
+                backpicPath.mkdirs();
+            }
+            File backpic=new File("/sdcard/Android/data/com.miaomoe.zixi","backImage.png");
+
+        if(rawHeight>dm.heightPixels&&rawWidth>dm.widthPixels){
+            Matrix smallPic=new Matrix();
+
+            Bitmap newBitmap;
+            if(rawHeight>rawWidth){
+                smallPic.reset();
+                smallPic.postScale((float)dm.widthPixels/(float)rawWidth,(float)dm.widthPixels/(float)rawWidth);
+                newBitmap = Bitmap.createBitmap(bm, 0, 0,rawWidth,rawHeight, smallPic, true);
+            }else{
+                smallPic.reset();
+                smallPic.postScale((float)dm.heightPixels/(float)rawHeight,(float)dm.heightPixels/(float)rawHeight);
+                newBitmap = Bitmap.createBitmap(bm, 0, 0,rawWidth,rawHeight, smallPic, true);
+            }
+
+        //建立文件
+
+            boolean backpicResult;
+            try {
+                if(!backpic.exists()){
+                    backpicResult=backpic.createNewFile();
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            FileOutputStream fos=null;
+            try {
+                fos=new FileOutputStream(backpic);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            newBitmap.compress(Bitmap.CompressFormat.PNG,100,fos);
+        //然后将Bitmap保存到SDCard中
+            picPath=backpic.getAbsolutePath();
+            bm=newBitmap;
+        }
+            backPic.setImageBitmap(bm);
+            SharedPreferences.Editor setting=getSharedPreferences("setting",0).edit();
+            setting.putString("YBackPic",YpicPath);
+            setting.putString("BackPic",picPath);
+            setting.apply();
+            res.close();
         }
     }
 
