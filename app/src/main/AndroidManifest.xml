@@ -32,5 +32,8 @@
         <activity android:name=".FindEmpty" android:label="统计">
 
         </activity>
+        <activity android:name=".Setting" android:label="设置">
+
+        </activity>
     </application>
 </manifest>
