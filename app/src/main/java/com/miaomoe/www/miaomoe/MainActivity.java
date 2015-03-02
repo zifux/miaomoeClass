@@ -81,6 +81,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     public List<Map<String,Object>> dataList5;
     public List<Map<String,Object>> dataListEmpty;
 
+
     private mHandler mainHandler=new mHandler();
     private JSONArray data;
     int z=9-Calendar.getInstance().get(Calendar.WEEK_OF_YEAR);
@@ -196,8 +197,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         if (id == R.id.action_settings) {
             /*Intent text=new Intent(this,Setting.class);
             startActivityForResult(text, 100);*/
-            Intent pic=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            startActivityForResult(pic,200);
+            Intent setting=new Intent(this,Setting.class);
+            startActivityForResult(setting,300);
             return true;
         }else if(id == R.id.action_date){
             if(item.getTitle()=="今天"){
@@ -409,73 +410,12 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 setPage(5);
         }
     }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode==200&&resultCode==RESULT_OK){
-            String[] type={MediaStore.Images.Media.DATA};
-            Uri image=data.getData();
-            Cursor res=getContentResolver().query(image,type,null,null,null);
-            res.moveToFirst();
-            String YpicPath=res.getString(res.getColumnIndex(type[0]));
-            Bitmap bm=(BitmapFactory.decodeFile(YpicPath));
-            String picPath=YpicPath;
-            //原图宽高
-            int rawHeight = bm.getHeight();
-            int rawWidth = bm.getWidth();
-            // 设定图片新的高宽
-            DisplayMetrics dm=new DisplayMetrics();
-            getWindowManager().getDefaultDisplay().getMetrics(dm);
-            File backpicPath=new File("/sdcard/Android/data/com.miaomoe.zixi");
-            if(!backpicPath.exists()){
-                backpicPath.mkdirs();
-            }
-            File backpic=new File("/sdcard/Android/data/com.miaomoe.zixi","backImage.png");
-
-        if(rawHeight>dm.heightPixels&&rawWidth>dm.widthPixels){
-            Matrix smallPic=new Matrix();
-
-            Bitmap newBitmap;
-            if(rawHeight>rawWidth){
-                smallPic.reset();
-                smallPic.postScale((float)dm.widthPixels/(float)rawWidth,(float)dm.widthPixels/(float)rawWidth);
-                newBitmap = Bitmap.createBitmap(bm, 0, 0,rawWidth,rawHeight, smallPic, true);
-            }else{
-                smallPic.reset();
-                smallPic.postScale((float)dm.heightPixels/(float)rawHeight,(float)dm.heightPixels/(float)rawHeight);
-                newBitmap = Bitmap.createBitmap(bm, 0, 0,rawWidth,rawHeight, smallPic, true);
-            }
-
-        //建立文件
-
-            boolean backpicResult;
-            try {
-                if(!backpic.exists()){
-                    backpicResult=backpic.createNewFile();
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            FileOutputStream fos=null;
-            try {
-                fos=new FileOutputStream(backpic);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            newBitmap.compress(Bitmap.CompressFormat.PNG,100,fos);
-        //然后将Bitmap保存到SDCard中
-            picPath=backpic.getAbsolutePath();
-            bm=newBitmap;
-        }
-            backPic.setImageBitmap(bm);
-            SharedPreferences.Editor setting=getSharedPreferences("setting",0).edit();
-            setting.putString("YBackPic",YpicPath);
-            setting.putString("BackPic",picPath);
-            setting.apply();
-            res.close();
+        if(resultCode==333&&data!=null){
+            backPic.setImageBitmap(BitmapFactory.decodeFile(data.getDataString()));
         }
     }
+
 
     public void setbtn(int btn) {
         btn1.setBackgroundColor(Color.parseColor("#60000000"));
