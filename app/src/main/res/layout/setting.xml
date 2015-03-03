@@ -17,8 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_margin="10dp"
-        android:layout_weight="1">
+        android:layout_margin="10dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -38,11 +37,17 @@
 
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:text="选择"
             android:id="@+id/setting_select_pic" />
 
     </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="删除背景"
+        android:id="@+id/setting_deleteBackPic" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -57,8 +62,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="测试版本:0.2"
+        android:text="@string/setting_about"
         android:id="@+id/setting_about_info"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:editable="false"
+        android:textStyle="bold"
+        android:gravity="center" />
 
 </LinearLayout>

@@ -98,10 +98,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         initView();
         String backpic=getSharedPreferences("setting",0).getString("BackPic",null);
-        if(backpic!=null){
+        if(backpic!=null&&!backpic.equals("无")){
             backPic.setImageBitmap(BitmapFactory.decodeFile(backpic));
-        }else{
-            backpic=getSharedPreferences("setting",0).getString("YBackPic",null);
         }
         if(z<=0){
             z=1;
@@ -214,11 +212,18 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 ((TextView)findViewById(R.id.loading)).setText("Loading...");
                 item.setTitle("今天");
             }
-
             return true;
         }else if(id==R.id.action_FindEmpty){
             Intent text=new Intent(this,FindEmpty.class);
             startActivityForResult(text, 100);
+            return true;
+        }else if(id==R.id.action_login){
+            Intent text=new Intent(this,FindEmpty.class);
+            startActivityForResult(text,400);
+            return true;
+        }else if(id==R.id.action_myClass){
+            Intent text=new Intent(this,FindEmpty.class);
+            startActivityForResult(text,500);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -413,6 +418,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode==333&&data!=null){
             backPic.setImageBitmap(BitmapFactory.decodeFile(data.getDataString()));
+        }
+        else if(resultCode==334){
+            backPic.setImageResource(R.drawable.background);
         }
     }
 
