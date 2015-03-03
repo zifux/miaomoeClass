@@ -32,6 +32,9 @@
         <activity android:name=".FindEmpty" android:label="统计">
 
         </activity>
+        <activity android:name=".Login" android:label="登录">
+
+        </activity>
         <activity android:name=".Setting" android:label="设置">
             <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
             <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>

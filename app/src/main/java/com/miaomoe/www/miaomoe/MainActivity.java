@@ -218,7 +218,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             startActivityForResult(text, 100);
             return true;
         }else if(id==R.id.action_login){
-            Intent text=new Intent(this,FindEmpty.class);
+            Intent text=new Intent(this,Login.class);
             startActivityForResult(text,400);
             return true;
         }else if(id==R.id.action_myClass){
