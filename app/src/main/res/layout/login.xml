@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
         android:scaleType="centerCrop"
-        android:src="@drawable/app_student_loginz"
+        android:src="@drawable/app_student_logins"
         android:layout_weight="1" />
 
     <LinearLayout
