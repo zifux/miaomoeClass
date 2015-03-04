@@ -57,6 +57,7 @@ public class NetPost extends AsyncTask<Integer, Integer, String> {
         }
         result=res;
         Log.i("a","完成,即将回调");
+        //showDialog("完成,即将回调");
         return  result;
     }
 

@@ -33,7 +33,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberPassword"
+            android:inputType="number"
             android:ems="10"
             android:id="@+id/login_studentID"
             android:layout_margin="10dp"
@@ -62,15 +62,22 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberPassword"
+            android:inputType="numberPassword|textPassword"
             android:ems="10"
             android:id="@+id/login_studentPW"
             android:layout_margin="10dp"
             android:layout_weight="1" />
     </LinearLayout>
 
-    <Button
+    <ImageView
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/yzm"
+        android:layout_gravity="center_horizontal"
+        android:adjustViewBounds="false" />
+
+    <Button
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="登录"
         android:id="@+id/login_loginbtn"
