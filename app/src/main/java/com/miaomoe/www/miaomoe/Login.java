@@ -64,7 +64,7 @@ public class Login {
             getRes = httpClient.execute(get);
             HttpEntity entity = getRes.getEntity();
             Bitmap w= BitmapFactory.decodeStream(entity.getContent());
-            black=new ImageProcess().blackwhite(135,w);/*识别验证码*/
+            black=ImageProcess.blackwhite(135,w);/*识别验证码*/
         } catch (IOException e) {
             e.printStackTrace();
         }

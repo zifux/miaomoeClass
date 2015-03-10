@@ -7,7 +7,7 @@ public class ImageProcess {
     public ImageProcess() {
         // TODO Auto-generated constructor stub
     }
-    public int[] blackwhite(int val,Bitmap myBitmap){
+    public static int[] blackwhite(int val,Bitmap myBitmap){
         // Create new array
         int width = 8;
         int height = 12;
@@ -166,7 +166,6 @@ public class ImageProcess {
         myBitmap.getPixels(num[2], 0, width, 6+13*2, 4, width, height);
         myBitmap.getPixels(num[3], 0, width, 6+13*3, 4, width, height);
 
-
         // Apply pixel-by-pixel change
         for(int i=0;i<4;i++){
             int index = 0;
@@ -191,7 +190,6 @@ public class ImageProcess {
         }
 
         int[] resNumber=new int[4];
-        Log.i("yzm","jijiangxunhuan");
         for(int k=0;k<4;k++){
             int i=0;
             int lastll=0;

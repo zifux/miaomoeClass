@@ -18,19 +18,77 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
-        <include layout="@layout/bottom"
-            />
-
-        <android.support.v4.view.ViewPager
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:id="@+id/vper"
-            android:layout_weight="1"
-            android:layout_marginBottom="5dp" />
+            android:layout_weight="1">
 
-        <include layout="@layout/top"
-            />
+            <include layout="@layout/bottom"
+                />
 
+            <android.support.v4.view.ViewPager
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:id="@+id/vper"
+                android:layout_weight="1"
+                android:layout_marginBottom="5dp" />
+
+            <include layout="@layout/top"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:minHeight="30dp"
+            android:background="#aa0095eb">
+
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton"
+                android:minHeight="30dp"
+                android:minWidth="30dp"
+                android:nestedScrollingEnabled="false"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/class_table"
+                android:scaleType="centerInside"
+                android:background="#00c8dca3"
+                android:padding="8dp" />
+
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton6"
+                android:minHeight="30dp"
+                android:minWidth="30dp"
+                android:nestedScrollingEnabled="false"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/add"
+                android:scaleType="centerInside"
+                android:padding="8dp"
+                android:background="#00002adc" />
+
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton7"
+                android:minHeight="30dp"
+                android:minWidth="30dp"
+                android:nestedScrollingEnabled="false"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/user"
+                android:scaleType="centerInside"
+                android:padding="8dp"
+                android:background="#00c8dca3" />
+
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>
