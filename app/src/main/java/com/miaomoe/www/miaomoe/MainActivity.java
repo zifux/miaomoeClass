@@ -192,7 +192,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         if (id == R.id.action_settings) {
             /*Intent text=new Intent(this,Setting.class);
             startActivityForResult(text, 100);*/
-            Intent setting=new Intent(this,Setting.class);
+            Intent setting=new Intent(this,Settings.class);
             startActivityForResult(setting,300);
             return true;
         }else if(id == R.id.action_date){
