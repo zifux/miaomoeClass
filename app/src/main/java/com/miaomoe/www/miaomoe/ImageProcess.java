@@ -209,7 +209,6 @@ public class ImageProcess {
             }
             ll=99999;
             resNumber[k]=is;
-            Log.i("picRes", String.valueOf(is));
             is=0;
         }
         Log.i("yzm", String.valueOf(resNumber[0])+resNumber[1]+resNumber[2]+resNumber[3]);

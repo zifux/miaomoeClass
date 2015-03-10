@@ -1,22 +1,12 @@
 package com.miaomoe.www.miaomoe;
 
-import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
-import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -24,7 +14,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,16 +24,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONTokener;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -97,19 +82,31 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         abr.setBackgroundDrawable(res.getDrawable(R.drawable.bar2));
         setContentView(R.layout.activity_main);
         initView();
-        String backpic=getSharedPreferences("setting",0).getString("BackPic",null);
-        if(backpic!=null&&!backpic.equals("无")){
-            backPic.setImageBitmap(BitmapFactory.decodeFile(backpic));
-        }
-        if(z<=0){
-            z=1;
-        }
+        setPage(1);
+        initSetting();
+
         NetPost getClass=new NetPost(mainHandler,this);
         getClass.execute(z,x);
 
         initEvent();
-        setPage(1);
 
+    }
+
+    private void initSetting() {
+        String backpic=getSharedPreferences("setting",0).getString("BackPic",null);
+        String cookie=getSharedPreferences("setting",0).getString("Cookie",null);
+        String user=getSharedPreferences("setting",0).getString("user",null);
+        String pw=getSharedPreferences("setting",0).getString("pw",null);
+        if(backpic!=null&&!backpic.equals("无")){
+            backPic.setImageBitmap(BitmapFactory.decodeFile(backpic));
+        }
+        if(cookie!=null&&user!=null&&pw!=null){
+            new NetLogin(mainHandler,this,getSharedPreferences("setting",0).edit()).execute("reLog",cookie);
+        }
+
+        if(z<=0){
+            z=1;
+        }
     }
 
     private void initEvent() {
@@ -218,7 +215,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             startActivityForResult(text, 100);
             return true;
         }else if(id==R.id.action_login){
-            Intent text=new Intent(this,Login.class);
+            Intent text=new Intent(this,LoginActivity.class);
             startActivityForResult(text,400);
             return true;
         }else if(id==R.id.action_myClass){
@@ -452,7 +449,13 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     class mHandler extends Handler {
         public void handleMessage(Message msg) {
-            MainActivity.this.toUpdate(msg.getData().getString("data"));
+            if(msg.getData().getBoolean("LogResult",false)){
+                Toast.makeText(getApplicationContext(), "登入成功",
+                        Toast.LENGTH_SHORT).show();
+            }else{
+                MainActivity.this.toUpdate(msg.getData().getString("data"));
+            }
+
         }
     }
 }

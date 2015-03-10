@@ -1,34 +1,14 @@
 package com.miaomoe.www.miaomoe;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
-import android.content.res.Resources;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.os.PersistableBundle;
-import android.provider.MediaStore;
-import android.support.v7.app.ActionBarActivity;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -37,84 +17,98 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
-
-public class Login extends Activity implements View.OnClickListener {
-    TextView textPicPath;
-    SharedPreferences.Editor setting;
-    android.support.v7.app.ActionBar abr;
-    Button slog;
-    EditText spw;
-    TextView sid;
-    ImageView yzm;
-    LogHandler mLogHandler;
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        setContentView(R.layout.login);
-        initView();
-        initEvent();
-    }
-
-    private void initEvent() {
-        slog.setOnClickListener(this);
-        mLogHandler=new LogHandler();
-    }
-
-    private void initView() {
-        slog= (Button) findViewById(R.id.login_loginbtn);
-        sid= (TextView) findViewById(R.id.login_studentID);
-        spw= (EditText) findViewById(R.id.login_studentPW);
-        yzm= (ImageView) findViewById(R.id.yzm);
-    }
-
-    @Override
-    public void onClick(View v) {
-        int id=v.getId();
-        Log.i("login","aaaaaaaaaaaaaaadddddddd");
-        if (id == R.id.login_loginbtn) {
-            Log.i("login","判断");
-            if(false/*sid.getText().equals("")||sid.getText().length()!=10*/){
-                Log.i("login","用户名错误");
-            }else if(false/*spw.getText().toString().equals("")*/){
-                Log.i("login","密码错误");
-            }else if(true){
-                Log.i("login","即将启动");
-                Log.i("login","dddddddddddddddddddddddddd");
-new NetLogin(mLogHandler,this).execute(0,1,2);
+/**
+ * Created by aszer_000 on 2015/3/5 0005.
+ */
+public class Login {
+    public static Boolean useSessionLogin(String sessionid){
+        DefaultHttpClient httpClient=new DefaultHttpClient();
+        Boolean result=false;
+        Log.i("cookic", sessionid);
+        HttpGet get2=new HttpGet("http://210.30.48.14:8080/ACTIONQUERYSTUDENTSCORE.APPPROCESS");
+        get2.setHeader("Cookie", "JSESSIONID=" + sessionid);
+        try {
+            HttpResponse getRes = httpClient.execute(get2);
+            String returnHTML= EntityUtils.toString(getRes.getEntity());
+            Log.i("returnHTML",returnHTML);
+            Pattern p = Pattern.compile("\\(学生\\) .+ 成绩查询");
+            Matcher m = p.matcher(returnHTML);
+            if(m.find()){
+                result=true;
             }else{
-                Log.i("login","未知错误");
+                result=false;
             }
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-    }
-    class LogHandler extends Handler {
-        public void handleMessage(Message msg) {
-            Login.this.toUpdate(msg.getData().getIntArray("pic"));
-        }
+        return result;
     }
 
-    private void toUpdate(int[] data) {
-        Log.i("update", String.valueOf(data));
-       /* Bitmap bitmap = Bitmap.createBitmap(8, 12, Bitmap.Config.RGB_565);
-        bitmap.setPixels(data, 0, 8, 0, 0, 8, 12);
-        yzm.setImageBitmap(bitmap);*/
+    public static Boolean firstReLogin(SharedPreferences.Editor setting,String user,String pw){
+        DefaultHttpClient httpClient=new DefaultHttpClient();
+        Boolean result=false;
+        HttpPost post;
+        HttpGet get;
+        int[] black=null;
+        HttpResponse getRes=null;
+        get=new HttpGet("http://210.30.48.14:8080/ACTIONVALIDATERANDOMPICTURE.APPPROCESS");
+        try {
+            getRes = httpClient.execute(get);
+            HttpEntity entity = getRes.getEntity();
+            Bitmap w= BitmapFactory.decodeStream(entity.getContent());
+            black=new ImageProcess().blackwhite(135,w);/*识别验证码*/
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        List<Cookie> cookies = httpClient.getCookieStore().getCookies();
+        String sessionid=cookies.get(0).getValue();
+        Log.i("cookic",sessionid);
+        get.abort();
+        post = new HttpPost("http://210.30.48.14:8080/ACTIONLOGON.APPPROCESS");
+        post.setHeader("Cookie","JSESSIONID=" + sessionid);
+        Log.i("a", "创建了一个Post");
+        List<NameValuePair> data=new ArrayList<>();
+        if (black != null) {
+            data.add(new BasicNameValuePair("Agnomen",""+black[0]+black[1]+black[2]+black[3]));
+        }else{
+            return false;
+        }
+        data.add(new BasicNameValuePair("WebUserNO",user));
+        data.add(new BasicNameValuePair("Password",pw));
+        data.add(new BasicNameValuePair("submit.x","12"));
+        data.add(new BasicNameValuePair("submit.y","8"));
+        try {
+            HttpEntity en = new UrlEncodedFormEntity(data, HTTP.UTF_8);
+            Log.i("a",en.toString());
+            post.setEntity(en);
+            HttpResponse toget=httpClient.execute(post);
+            Log.i("StatusCode", String.valueOf(toget.getStatusLine().getStatusCode()));
+            post.abort();
+            if(toget.getStatusLine().getStatusCode()==200){
+                if(useSessionLogin(sessionid)){
+                    result=true;
+                    setting.putString("Cookie",sessionid);
+                    setting.putString("user",sessionid);
+                    setting.putString("pw",sessionid);
+                    setting.commit();
+                }else{
+                    result=false;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+
+        Log.i("a","完成,即将回调");
+        return  result;
     }
 }
-
