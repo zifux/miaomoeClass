@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="63dp"
+    android:minHeight="30dp"
+    android:background="@drawable/topborder">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:id="@+id/zixi"
+                android:minHeight="30dp"
+                android:minWidth="30dp"
+                android:nestedScrollingEnabled="false"
+                android:layout_gravity="center"
+                android:src="@drawable/zixi"
+                android:scaleType="centerInside"
+                android:background="#00c8dca3"
+                android:layout_weight="1"
+                android:paddingBottom="1dp"
+                android:paddingTop="6dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="自习"
+                android:id="@+id/textView3"
+                android:layout_gravity="center_horizontal"
+                android:linksClickable="false"
+                android:textSize="10dp"
+                android:textIsSelectable="true"
+                android:textStyle="bold"
+                android:textColor="#ff373737"
+                android:layout_marginBottom="3dp"
+                android:singleLine="false" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:id="@+id/classTable"
+                android:minHeight="30dp"
+                android:minWidth="30dp"
+                android:nestedScrollingEnabled="false"
+                android:layout_gravity="center"
+                android:src="@drawable/class_table"
+                android:scaleType="centerInside"
+                android:background="#00c8dca3"
+                android:layout_weight="1"
+                android:paddingBottom="1dp"
+                android:paddingTop="6dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="课表"
+                android:id="@+id/kebiao"
+                android:layout_gravity="center_horizontal"
+                android:linksClickable="false"
+                android:textSize="10dp"
+                android:textIsSelectable="true"
+                android:textStyle="bold"
+                android:textColor="#ff373737"
+                android:layout_marginBottom="3dp"
+                android:singleLine="false" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:id="@+id/my"
+                android:minHeight="30dp"
+                android:minWidth="30dp"
+                android:nestedScrollingEnabled="false"
+                android:layout_gravity="center"
+                android:src="@drawable/my"
+                android:scaleType="centerInside"
+                android:background="#00c8dca3"
+                android:layout_weight="1"
+                android:paddingTop="6dp"
+                android:paddingBottom="1dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="我"
+                android:id="@+id/textView4"
+                android:layout_gravity="center_horizontal"
+                android:linksClickable="false"
+                android:textSize="10dp"
+                android:textIsSelectable="true"
+                android:textStyle="bold"
+                android:textColor="#ff373737"
+                android:layout_marginBottom="3dp" />
+        </LinearLayout>
+
+</LinearLayout>

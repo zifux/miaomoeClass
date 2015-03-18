@@ -69,6 +69,7 @@ public class NetLogin extends AsyncTask<String, Integer,Boolean>  {
 
     @Override
     protected void onPostExecute(Boolean result) {
+
         Log.i("NetLgoinResult", String.valueOf(result));
         Message msg=new Message();
         Bundle bun=new Bundle();

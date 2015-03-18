@@ -4,7 +4,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="18dp"
         android:layout_gravity="center_horizontal">
 
         <ImageButton
@@ -16,7 +16,7 @@
             android:minHeight="30dp"
             android:src="@drawable/sun1"
             android:adjustViewBounds="true"
-            android:scaleType="fitEnd"
+            android:scaleType="fitCenter"
             android:layout_gravity="bottom" />
 
         <ImageButton
@@ -62,6 +62,6 @@
             android:background="#96ffe89d"
             android:minHeight="30dp"
             android:adjustViewBounds="true"
-            android:scaleType="fitEnd"
+            android:scaleType="fitCenter"
             android:src="@drawable/sun5" />
     </LinearLayout>

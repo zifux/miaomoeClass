@@ -44,6 +44,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private Fragment class5;
     private Fragment class7;
     private Fragment class9;
+    private ClassTable classTable;
     public mSimpleAdapter classList;
     private ArrayList<GridView> gVList;
     private ImageButton btn1;
@@ -76,10 +77,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        abr=getSupportActionBar();
-        abr.setSubtitle("\t 努力学习吧\\(≧ω≦)");
-        Resources res=getResources();
-        abr.setBackgroundDrawable(res.getDrawable(R.drawable.bar2));
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
         initView();
         setPage(1);
@@ -100,9 +98,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         if(backpic!=null&&!backpic.equals("无")){
             backPic.setImageBitmap(BitmapFactory.decodeFile(backpic));
         }
-        if(cookie!=null&&user!=null&&pw!=null){
+        /*if(cookie!=null&&user!=null&&pw!=null){
             new NetLogin(mainHandler,this,getSharedPreferences("setting",0).edit()).execute("reLog",cookie);
-        }
+        }*/
 
         if(z<=0){
             z=1;
@@ -171,6 +169,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         class5=new class3(this);
         class7=new class4(this);
         class9=new class5(this);
+        classTable=new ClassTable(this);
+
 
     }
 

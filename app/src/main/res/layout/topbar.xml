@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="50dp"
+    android:background="@drawable/mybar">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="自习评定"
+            android:id="@+id/textView5"
+            android:textSize="20dp"
+            android:textIsSelectable="false"
+            android:layout_gravity="center"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton"
+            android:layout_gravity="center_vertical|right"
+            android:maxWidth="50dp"
+            android:nestedScrollingEnabled="false"
+            android:scaleType="centerInside"
+            android:src="@drawable/settings"
+            android:minWidth="50dp"
+            android:background="#00000000"
+            android:padding="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+</RelativeLayout>

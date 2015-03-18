@@ -1,94 +1,67 @@
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    android:background="#ffebebeb"
     android:orientation="vertical"
-    android:background="#ffebebeb">
+    tools:context=".MainActivity">
 
     <ImageView
+        android:id="@+id/back_pic"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/back_pic"
         android:scaleType="centerCrop"
         android:src="@drawable/background" />
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:orientation="vertical"
+        <include layout="@layout/topbar" />
+
+        <FrameLayout
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:visibility="gone">
 
-            <include layout="@layout/bottom"
-                />
-
-            <android.support.v4.view.ViewPager
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:id="@+id/vper"
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:layout_marginBottom="5dp" />
+                android:orientation="vertical">
 
-            <include layout="@layout/top"
-                />
+                <include layout="@layout/bottom" />
 
-        </LinearLayout>
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/vper"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1" />
 
-        <LinearLayout
-            android:orientation="horizontal"
+                <include layout="@layout/top" />
+
+            </LinearLayout>
+        </FrameLayout>
+
+        <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+            android:visibility="visible">
+            <include layout="@layout/class_table"/>
+        </FrameLayout>
+        <FrameLayout
             android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:minHeight="30dp"
-            android:background="#aa0095eb">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:visibility="gone"></FrameLayout>
 
-            <ImageButton
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageButton"
-                android:minHeight="30dp"
-                android:minWidth="30dp"
-                android:nestedScrollingEnabled="false"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:src="@drawable/class_table"
-                android:scaleType="centerInside"
-                android:background="#00c8dca3"
-                android:padding="8dp" />
+        <include layout="@layout/bottombar" />
 
-            <ImageButton
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageButton6"
-                android:minHeight="30dp"
-                android:minWidth="30dp"
-                android:nestedScrollingEnabled="false"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:src="@drawable/add"
-                android:scaleType="centerInside"
-                android:padding="8dp"
-                android:background="#00002adc" />
-
-            <ImageButton
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageButton7"
-                android:minHeight="30dp"
-                android:minWidth="30dp"
-                android:nestedScrollingEnabled="false"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:src="@drawable/user"
-                android:scaleType="centerInside"
-                android:padding="8dp"
-                android:background="#00c8dca3" />
-
-        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>
