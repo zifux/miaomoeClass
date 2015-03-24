@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="80dp"
     android:layout_height="124dp"
     android:padding="3dp"
-    android:background="#3c000000">
+    android:background="@drawable/classroom">
 
     <TextView
         android:layout_width="wrap_content"
@@ -37,6 +37,6 @@
         android:textStyle="bold"
         android:textSize="20dp"
         android:layout_gravity="center_horizontal"
-        android:textColor="#fff5f5f5"/>
+        android:textColor="#ff141414"/>
 
 </LinearLayout>

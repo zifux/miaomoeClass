@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -24,7 +25,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     EditText spw;
     TextView sid;
     ImageView yzm;
-    LogHandler mLogHandler;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +37,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
     private void initEvent() {
         slog.setOnClickListener(this);
-        mLogHandler=new LogHandler();
     }
 
     private void initView() {
@@ -54,19 +53,12 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             String user=sid.getText().toString();
             String pw=spw.getText().toString();
             if(user.equals("")||user.length()!=10){
-                Log.i("login","用户名错误");
+                showInfo("学号长度错误");
             }else if(pw.equals("")){
-                Log.i("login","密码不能为空");
-            }else if(true){
-                new NetLogin(mLogHandler,this,setting).execute("firstLog",user,pw);
+                showInfo("密码不能为空");
             }else{
-                Log.i("login","未知错误");
+                new BackGround(this).execute(String.valueOf(Do.FirstLgoIn),user,pw);
             }
-        }
-    }
-    class LogHandler extends Handler {
-        public void handleMessage(Message msg) {
-            LoginActivity.this.toUpdate(msg.getData().getBoolean("LogResult"));
         }
     }
     private void showInfo(String info){
@@ -74,21 +66,5 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 Toast.LENGTH_SHORT).show();
     }
 
-    private void toUpdate(Boolean data) {
-        Log.i("update", String.valueOf(data));
-        if(data!=null&&data){
-            showInfo("登入成功");
-            setResult(444);
-            finish();
-        }else{
-            showInfo("用户名或密码错误");
-        }
-
-
-       /* Bitmap bitmap = Bitmap.createBitmap(8, 12, Bitmap.Config.RGB_565);
-        bitmap.setPixels(data, 0, 8, 0, 0, 8, 12);
-        yzm.setImageBitmap(bitmap);*/
-
-    }
 }
 

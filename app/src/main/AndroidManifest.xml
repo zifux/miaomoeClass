@@ -29,7 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FindEmpty" android:label="统计">
+        <activity android:name=".Statistics" android:label="统计">
 
         </activity>
         <activity android:name=".LoginActivity" android:label="登录">

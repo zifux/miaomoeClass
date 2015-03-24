@@ -61,6 +61,7 @@ public class mSimpleAdapter extends BaseAdapter implements Filterable {
     private List<? extends Map<String, ?>> mData;
 
     private int mResource;
+    private int mResource2;
     private int mDropDownResource;
     private LayoutInflater mInflater;
     private LayoutInflater mmInflater;
@@ -84,9 +85,10 @@ public class mSimpleAdapter extends BaseAdapter implements Filterable {
      *        in the from parameter.
      */
     public mSimpleAdapter(Context context, List<? extends Map<String, ?>> data,
-                         int resource, String[] from, int[] to) {
+                         int resource,int Resource2, String[] from, int[] to) {
         mData = data;
         mResource = mDropDownResource = resource;
+        mResource2 = Resource2;
         mFrom = from;
         mTo = to;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -120,13 +122,13 @@ public class mSimpleAdapter extends BaseAdapter implements Filterable {
      */
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        return createViewFromResource(position, convertView, parent, mResource);
+        return createViewFromResource(position, convertView, parent, mResource,mResource2);
     }
 
     private View createViewFromResource(int position, View convertView,
-                                        ViewGroup parent, int resource) {
+                                        ViewGroup parent, int resource, int resource2) {
         View v;
-        View ev=mmInflater.inflate(R.layout.empty_item_classroom,parent,false);
+        View ev=mmInflater.inflate(resource2,parent,false);
 
         if (convertView == null) {
             v = mInflater.inflate(resource, parent, false);
@@ -154,12 +156,13 @@ public class mSimpleAdapter extends BaseAdapter implements Filterable {
 
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
-        return createViewFromResource(position, convertView, parent, mDropDownResource);
+        return createViewFromResource(position, convertView, parent, mDropDownResource,mResource2);
     }
 
     @Override
     public int getItemViewType(int position) {//定义不同位置的convertView类型
-        if(mData.get(position).get("name").toString()=="空"){
+        String k=mData.get(position).get("name").toString();
+        if(k.equals("空")||k.isEmpty()){
             return 0;
         }else{
             return 1;
@@ -168,7 +171,7 @@ public class mSimpleAdapter extends BaseAdapter implements Filterable {
 
     @Override
     public int getViewTypeCount() {//convertView总共类型。默认为1
-        return 2;//返回2,表示有2种。你目前只用了2种
+        return 2;//返回2,表示有2种。目前只用了2种
     }
 
     public Map<String, ?> getmData(int position){
@@ -219,7 +222,7 @@ public class mSimpleAdapter extends BaseAdapter implements Filterable {
                     } else if (v instanceof TextView) {
                         // Note: keep the instanceof TextView check at the bottom of these
                         // ifs since a lot of views are TextViews (e.g. CheckBoxes).
-                        if("空"==text){
+                        if("空".equals(text)||text.isEmpty()){
                             isempty = true;
                         }
                         setViewText((TextView) ev, text);

@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="3dp"
-    android:background="#3c000000">
+    android:background="#5a000000">
 
     <TextView
         android:layout_width="wrap_content"
@@ -14,7 +14,7 @@
         android:textStyle="bold"
         android:textSize="20dp"
         android:layout_gravity="center_horizontal"
-        android:textColor="#ff141414" />
+        android:textColor="#fff5f5f5" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -26,7 +26,7 @@
         android:width="120dp"
         android:height="22dp"
         android:gravity="center_horizontal"
-        android:textColor="#ff282828"/>
+        android:textColor="#fff5f5f5"/>
 
     <TextView
         android:layout_width="wrap_content"

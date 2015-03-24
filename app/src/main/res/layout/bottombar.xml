@@ -10,7 +10,9 @@
             android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:id="@+id/bottombar_room"
+            android:background="@drawable/onclick">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -48,7 +50,9 @@
             android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_weight="1" >
+            android:layout_weight="1"
+            android:id="@+id/bottombar_class"
+            android:background="@drawable/onclick">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -85,7 +89,10 @@
             android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_weight="1" >
+            android:layout_weight="1"
+            android:id="@+id/bottombar_my"
+            android:focusable="false"
+            android:background="@drawable/onclick">
 
             <ImageView
                 android:layout_width="wrap_content"
