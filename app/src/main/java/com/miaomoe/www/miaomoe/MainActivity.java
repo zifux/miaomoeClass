@@ -459,7 +459,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         if (resultCode == 333 && data != null) {
             backPic.setImageBitmap(BitmapFactory.decodeFile(data.getDataString()));
         } else if (resultCode == 334) {
-            backPic.setImageResource(R.drawable.background);
+            //showInfo("壁纸已更改");
         } else if (resultCode == 444) {
             new BackGround(this).execute(String.valueOf(Do.GetClassTable));
             new BackGround(this).execute(String.valueOf(Do.getStudentScore), "14", "15");
@@ -496,11 +496,11 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     public void upClassRoomView() {
         fList = new ArrayList<>();
-        fList.add(new oneClassPage(this));
-        fList.add(new oneClassPage2(this));
-        fList.add(new oneClassPage3(this));
-        fList.add(new oneClassPage4(this));
-        fList.add(new oneClassPage5(this));
+        fList.add(oneClassPage.createClassPage(this));
+        fList.add(oneClassPage2.createClassPage(this));
+        fList.add(oneClassPage3.createClassPage(this));
+        fList.add(oneClassPage4.createClassPage(this));
+        fList.add(oneClassPage5.createClassPage(this));
         fpa = new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {

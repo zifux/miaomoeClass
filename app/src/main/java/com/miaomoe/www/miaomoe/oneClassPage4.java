@@ -10,9 +10,12 @@ import android.widget.GridView;
 
 public class oneClassPage4 extends Fragment {
     private MainActivity f;
-    oneClassPage4(MainActivity data){
-        this.f=data;
+    public static oneClassPage createClassPage(MainActivity data){
+        oneClassPage in=new oneClassPage();
+        in.f=data;
+        return in;
     }
+    public oneClassPage4(){}
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View theView=inflater.inflate(R.layout.class1_2, container, false);

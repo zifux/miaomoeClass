@@ -10,8 +10,7 @@
         android:id="@+id/back_pic"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/background" />
+        android:scaleType="centerCrop" />
 
     <FrameLayout
         android:layout_width="fill_parent"

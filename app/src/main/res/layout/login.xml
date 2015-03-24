@@ -58,11 +58,10 @@
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:textStyle="bold"/>
-
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberPassword|textPassword"
+            android:inputType="textPassword"
             android:ems="10"
             android:id="@+id/login_studentPW"
             android:layout_margin="10dp"

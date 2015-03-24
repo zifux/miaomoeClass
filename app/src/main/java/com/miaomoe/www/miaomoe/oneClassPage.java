@@ -13,9 +13,12 @@ import java.util.Map;
 
 
 public class oneClassPage extends Fragment {
-    private MainActivity f;
-    oneClassPage(MainActivity data){
-        this.f=data;
+    public MainActivity f;
+    public oneClassPage(){}
+    public static oneClassPage createClassPage(MainActivity data){
+        oneClassPage in=new oneClassPage();
+        in.f=data;
+        return in;
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
