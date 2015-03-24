@@ -9,12 +9,12 @@ import java.util.List;
  * Created by xiuu on 2015/3/17 0017.
  */
 public class HtmlNode {
-    private Tag mine;
+    private HtmlTag mine;
     private List<HtmlNode> children;
     private String name;
     private int deep;
     private int childDeep;
-    HtmlNode(Tag mine){
+    HtmlNode(HtmlTag mine){
         this.name=mine.getTagName();
         this.children=new ArrayList<>();
         this.mine=mine;
@@ -35,7 +35,7 @@ public class HtmlNode {
 
     public List<HtmlNode> getChilds(){return children;}
 
-    public Tag get(){
+    public HtmlTag get(){
         return mine;
     }
 
@@ -49,7 +49,7 @@ public class HtmlNode {
                 return children.get(k);
             }
         }
-        return new HtmlNode(new Tag("NULL"));
+        return new HtmlNode(new HtmlTag("NULL"));
     }
     public String[] getNames(){
         String[] res=new String[children.size()];

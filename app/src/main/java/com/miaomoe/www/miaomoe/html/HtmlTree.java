@@ -1,10 +1,6 @@
 package com.miaomoe.www.miaomoe.html;
 
-import android.text.Html;
-import android.util.Log;
-
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 
 /**
@@ -12,10 +8,10 @@ import java.util.Stack;
  */
 public class HtmlTree {
     private HtmlNode root;
-    HtmlTree(ArrayList<Tag> data){
+    HtmlTree(ArrayList<HtmlTag> data){
         Stack<HtmlNode> stack=new Stack<>();
         for(int i=0;i<data.size();i++){
-            Tag is=data.get(i);
+            HtmlTag is=data.get(i);
             if(is.getTagType()!=1){
                 stack.push(new HtmlNode(is));
             }else{
@@ -32,7 +28,7 @@ public class HtmlTree {
                 }//查找闭合标签
             }
         }//遍历结束
-        root=new HtmlNode(new Tag("root"));
+        root=new HtmlNode(new HtmlTag("root"));
         while (!stack.empty()){
             root.addChild(stack.pop());
         }
