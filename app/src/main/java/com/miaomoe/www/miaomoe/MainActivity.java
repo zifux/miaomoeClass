@@ -269,7 +269,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             }
             return true;
         } else if (id == R.id.action_FindEmpty || id == R.id.menu_tongji) {
-            Intent text = new Intent(this, Statistics.class);
+            Intent text = new Intent(this, Statistic.class);
             startActivityForResult(text, 100);
             if (menuShowing) {
                 menuShow(false);
